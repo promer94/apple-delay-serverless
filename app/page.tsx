@@ -1,14 +1,16 @@
-
+import { Suspense } from 'react'
+import Google from './google';
+import Apple from './apple';
 
 export default async function Home() {
-  const start = Date.now()
-  await fetch("https://appleid.apple.com/.well-known/openid-configuration", {
-    cache: "no-store"
-  }).then(v => v.json())
-  const delay = Date.now() - start
   return (
-    <main>
-      https://appleid.apple.com/.well-known/openid-configuration delay: {delay}ms
-    </main>
+    <>
+      <Suspense fallback={null}>
+        <Google />
+      </Suspense>
+      <Suspense fallback={null}>
+        <Apple />
+      </Suspense>
+    </>
   );
 }
